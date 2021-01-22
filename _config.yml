@@ -7,36 +7,42 @@
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # --------------------------
-title: Chirpy                          # the main title
 
-tagline: A text-focused Jekyll theme   # it will display as the sub-title
+# the main title
+title: Balazs's BLOG @Reflection LLC
+# subtitle
+tagline: Building better teams and software!
 
 description: >-                        # used by seo meta and the atom feed
-  A minimal, portfolio, sidebar,
-  bootstrap Jekyll theme with responsive web design
-  and focuses on text presentation.
+  management, business, software
+  programming, softwareengineering, softwarearchitecture
+  agile
+  digitalization
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: ''
+url: 'hidegh.github.io'
 
-author: your_full_name                  # change to your full name
+author: Balázs HIDEGHÉTY                # change to your full name
+
+linkedin:
+  username: hideghety
 
 github:
-  username: github_username             # change to your github username
+  username: hidegh                      # change to your github username
 
 twitter:
-  username: twitter_username            # change to your twitter username
+  username: balazsHIDEGHETY             # change to your twitter username
 
 social:
-  name: your_full_name                  # it will shows as the copyright owner in Footer
-  email: example@doamin.com             # change to your email address
+  name: Balázs HIDEGHÉTY @ REFLECTION LLC       # it will shows as the copyright owner in Footer
+  email: balazs.hideghety@gmain.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username      # change to your twitter homepage
-    - https://github.com/username       # change to your github homepage
+    - https://www.linkedin.com/in/hideghety/
+    - https://github.com/hidegh/
     # Uncomment below to add more social links
+    # - https://twitter.com/username
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
 
 google_site_verification: google_meta_tag_verification # change to your verification string
 # --------------------------
@@ -47,7 +53,7 @@ google_site_verification: google_meta_tag_verification # change to your verifica
 baseurl: ''
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone: Asia/Shanghai
+timezone: America/New_York
 
 google_analytics:
   id: ''          # Fill with your Google Analytics ID
@@ -77,7 +83,7 @@ disqus:
 #
 #     dark   - Use the dark color scheme
 #
-theme_mode:   # [light|dark]
+theme_mode: light # [light|dark]
 
 # The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
@@ -86,8 +92,8 @@ theme_mode:   # [light|dark]
 # e.g. 'https://cdn.com'
 img_cdn: ''
 
-# the avatar on sidebar, support local or CORS resources
-avatar: https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/commons/avatar.jpg
+# the avatar on sidebar, support local or CORS resources: https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/commons/avatar.jpg
+avatar: /assets/img/me.jpg
 
 # boolean type, the global switch for ToC in posts.
 toc: true
