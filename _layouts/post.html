@@ -119,9 +119,13 @@ layout: default
   <div class="col-12 col-lg-11 col-xl-8">
     <div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
 
-    {% include related-posts.html %}
+    {% if site.post_view.show_related %}
+      {% include related-posts.html %}
+    {% endif %}
 
-    {% include post-nav.html %}
+    {% if site.post_view.show_navigation %}
+      {% include post-nav.html %}
+    {% endif %}
 
     {% if site.disqus.comments and page.comments %}
       {% include disqus.html %}

@@ -55,6 +55,10 @@ baseurl: ''
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
 timezone: America/New_York
 
+post_view:
+  show_related: true
+  show_navigation: false
+
 google_analytics:
   id: ''          # Fill with your Google Analytics ID
   pv:
