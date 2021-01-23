@@ -5,3 +5,5 @@
 # jekyll cache
 _site
 vendor
+Gem.win_platform
+Gemfile.lock
