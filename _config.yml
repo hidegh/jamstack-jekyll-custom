@@ -57,6 +57,7 @@ timezone: America/New_York
 
 post_view:
   show_related: true
+  disable_related_on_series: true
   show_navigation: false
 
 google_analytics:

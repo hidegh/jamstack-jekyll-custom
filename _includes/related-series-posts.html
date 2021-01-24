@@ -1,0 +1,74 @@
+<!--
+ Recommend the previous and next posts belonging to the same series as the current post.
+ This will use series_name and series_no to determine the related posts.
+-->
+
+<!-- The total size of related posts -->
+{% assign TOTAL_LINKS = 5 %}
+
+<!-- The size of the preview (in chars) -->
+{% assign LINK_PREVIEW = 100 %}
+
+<!-- The count of newer posts to show (if avail) - make sure this is TOTAL_LINKS - 2 at least, otherwise no PAST posts will be shown -->
+{% assign NEWER_POSTS_COUNT = 3 %}
+
+<!--
+ Algorithm:
+ Assume that we show items from 0 (0..TOTAL_LINKS)
+ We shift by: CURRENT_INDEX - TOTAL_LINKS + 1 (+1 is there because we show also currently selected post)
+ Then we do a cycle of 1..NEWER_POSTS_COUNT: we increment shift if series_count < shift + TOTAL_LINKS
+ Make sure that the shift is at least 0
+ Use skip/take filters to get final array of series posts
+-->
+
+<!-- Get all related posts, including self -->
+{% assign series_posts = site.posts | where_exp: "item", "item.series == page.series" | sort: "series_no", "last" | sort: "date" %}
+{% assign series_count = series_posts | size %}
+
+<!-- Find current index -->
+{% assign current_index = 0 %}
+
+{% for post in series_posts %}
+  {% if post.url == page.url %}
+    {% break %}
+  {% endif %}
+  {% assign current_index = current_index | plus: 1 %}
+{% endfor %}
+
+<!-- Calculate starting index -->
+{% assign starting_index = current_index | minus: TOTAL_LINKS | plus: 1 %}
+
+{% for i in (1..NEWER_POSTS_COUNT) %}
+  {% assign tmp = starting_index | plus: TOTAL_LINKS %}
+  {% if tmp < series_count %}
+    {% assign starting_index = starting_index | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+{% assign starting_index = starting_index | at_least: 0 %}
+
+<!-- Get post links -->
+{% assign link_posts = series_posts | skip: starting_index | take: TOTAL_LINKS %}
+
+<!-- Render UI -->
+<div id="related-posts" class="mt-5 mb-2 mb-sm-4">
+  <h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>{{ site.data.label.post.related_series_navigation_heading }}</h3>
+  <div class="card-deck mb-4">
+  {% for post in link_posts %}
+    <div class="card {% if page.url == post.url %} disabled {% endif %}">
+      <a class="{% if page.url == post.url %} disabled {% endif %}" href="{{ post.url | relative_url }}">
+        <div class="card-body">
+          {% include timeago.html date=post.date class="small" %}
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>{{ post.title }}</h3>
+          <div class="text-muted small">
+            <p>
+              {% include no-linenos.html content=post.content %}
+              {{ content | markdownify | strip_html | truncate: LINK_PREVIEW }}
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+  </div> <!-- .card-deck -->
+</div> <!-- #related-posts -->

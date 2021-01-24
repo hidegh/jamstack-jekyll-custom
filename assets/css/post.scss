@@ -181,6 +181,9 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
       transform: translate3d(0, -3px, 0);
       box-shadow: 0 10px 15px -4px rgba(0,0,0,0.15);
     }
+    &:disabled, &.disabled {
+      background-color: lightgrey;
+    }
   }
 
   .timeago {

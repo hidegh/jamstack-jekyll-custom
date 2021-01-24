@@ -13,6 +13,14 @@ layout: default
 
     <div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
 
+      {% if page.series != nil %}
+        <div class="mt-3 text-center">
+          <span>{{ site.data.label.post.related_series_heading }}</span>
+          <h1 class="text-uppercase mt-0">{{ page.series }}</h1>
+          <hr/>
+        </div>
+      {% endif %}
+
       <h1 data-toc-skip>{{ page.title }}</h1>
 
       <div class="post-meta text-muted d-flex flex-column">
@@ -119,7 +127,12 @@ layout: default
   <div class="col-12 col-lg-11 col-xl-8">
     <div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
 
-    {% if site.post_view.show_related %}
+    {% if page.series != nil %}
+      {% include related-series-posts.html %}
+    {% endif %}
+
+    <!-- https://shopify.github.io/liquid/basics/operators/#order-of-operations -->
+    {% if site.post_view.show_related and page.series == nil or site.post_view.disable_related_on_series == false %}
       {% include related-posts.html %}
     {% endif %}
 
