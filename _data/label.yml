@@ -11,7 +11,7 @@ panel:
 
 post:
   relate_posts: Further Reading
-  related_series_heading: 'Thnis Article Is Part Of The Series'
+  related_series_heading: 'This Article Is Part Of The Series'
   related_series_navigation_heading: 'Further Articles In This Series:'
   button:
     next: Newer
