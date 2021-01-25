@@ -103,7 +103,7 @@ avatar: /assets/img/me.jpg
 # boolean type, the global switch for ToC in posts.
 toc: true
 
-paginate: 10
+paginate: 4
 
 kramdown:
   syntax_highlighter: rouge
