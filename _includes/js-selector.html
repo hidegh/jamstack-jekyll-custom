@@ -22,6 +22,11 @@
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% endif %}
 
+<!--
+  add 'or true' to the statement to always load GA
+  IMO the prod env. and developer env. should work the same way (at least same scripts)
+  the only acceptable difference is: development using different configuration
+-->
 {% if jekyll.environment == 'production' %}
   <!-- PWA -->
   <script defer src="{{ '/app.js' | relative_url }}"></script>

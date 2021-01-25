@@ -29,7 +29,7 @@
       */
       options = { };
 
-      if (anonymizeIp) options[anonymize_ip] = true;
+      if (anonymizeIp) options['anonymize_ip'] = true;
 
       gtag('config', '{{ site.google_analytics.id }}', options);
     });

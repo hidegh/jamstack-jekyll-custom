@@ -2,16 +2,19 @@
 
   function defaultCookies() {
     console.log('default cookies');
-    loadGA(true);
+
+    if (typeof loadGA === 'function') loadGA(true);
   };
 
   function enableCookies() {
     console.log('enabled cookies');
-    loadGA();
+
+    if (typeof loadGA === 'function') loadGA(true);
   }
 
   function disableCookies() {
     console.log('disabled cookies');
+
     defaultCookies();
   }
 
@@ -32,6 +35,8 @@
     },
 
     onInitialise: function (status) {
+      console.log(`cc - onInitialise, status: ${status}`);
+
       var type = this.options.type;
       var didConsent = this.hasConsented();
       if (type == 'opt-in' && didConsent) {
@@ -46,6 +51,8 @@
     },
 
     onStatusChange: function (status, chosenBefore) {
+      console.log(`cc - onStatusChange, status: ${status}, chosenBefore: ${chosenBefore}`);
+
       var type = this.options.type;
       var didConsent = this.hasConsented();
       if (type == 'opt-in' && didConsent) {
@@ -57,6 +64,8 @@
     },
 
     onRevokeChoice: function () {
+      console.log(`cc - onRevokeChoice`);
+
       var type = this.options.type;
       if (type == 'opt-in') {
         disableCookies();
