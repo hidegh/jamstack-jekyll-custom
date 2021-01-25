@@ -8,23 +8,31 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script defer src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics.id }}"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function(event) {
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+  function loadGA(anonymizeIp) {
 
-    gtag('js', new Date());
+    document.addEventListener("DOMContentLoaded", function(event) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
 
-    /*
-    Note:
-    Without an opt-in consent, we need to use anonymization.
-    In general we should avoid collecting personal data.
-    Here we can do the usual if/then branching if we still decide to collect personal data (yes, even USER_ID or IP)!
+      gtag('js', new Date());
 
-    On the other hand, by using tools like Disqus, we need to notify user that:
-    - cookies are used
-    - and that 3rd party might store private data
-    - ...but even so, the user is fully in control over those data via the Disqus platform (consent is already given them)
-    */
-    gtag('config', '{{ site.google_analytics.id }}', { 'anonymize_ip': true });
-  });
+      /*
+      Note:
+      Without an opt-in consent, we need to use anonymization.
+      In general we should avoid collecting personal data.
+      Here we can do the usual if/then branching if we still decide to collect personal data (yes, even USER_ID or IP)!
+
+      On the other hand, by using tools like Disqus, we need to notify user that:
+      - cookies are used
+      - and that 3rd party might store private data
+      - ...but even so, the user is fully in control over those data via the Disqus platform (consent is already given them)
+      */
+      options = { };
+
+      if (anonymizeIp) options[anonymize_ip] = true;
+
+      gtag('config', '{{ site.google_analytics.id }}', options);
+    });
+  }
+
 </script>

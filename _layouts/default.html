@@ -50,6 +50,13 @@ layout: compress
 
     {% include search-loader.html %}
 
+    <!-- consent scripts -->
+    {% if site.consent_scripts %}
+      {% for script in site.consent_scripts %}
+        <script src="{{ script | relative_url }}"></script>
+      {% endfor %}
+    {% endif %}
+
   </body>
 
 </html>
