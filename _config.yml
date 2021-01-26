@@ -20,7 +20,7 @@ description: >-                        # used by seo meta and the atom feed
   digitalization
 
 consent_scripts:
-  - assets/js/cookieconsent.js
+  - assets/js/cookieconsent-config.js
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://hidegh.github.io'
@@ -127,7 +127,6 @@ collections:
   tabs:
     output: true
     sort_by: order
-
 
 defaults:
   -

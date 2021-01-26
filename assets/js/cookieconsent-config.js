@@ -3,13 +3,15 @@
   function defaultCookies() {
     console.log('default cookies');
 
+    // note: using anonymized IP
     if (typeof loadGA === 'function') loadGA(true);
   };
 
   function enableCookies() {
     console.log('enabled cookies');
 
-    if (typeof loadGA === 'function') loadGA(true);
+    if (typeof loadGA === 'function') loadGA(false);
+    if (typeof loadDisqus === 'function') loadDisqus();
   }
 
   function disableCookies() {
@@ -64,16 +66,29 @@
     },
 
     onRevokeChoice: function () {
+      // NOTE: this hook is called immediately after the revoke button is clicked and removea previous answers
       console.log(`cc - onRevokeChoice`);
 
       var type = this.options.type;
       if (type == 'opt-in') {
         disableCookies();
+
+        // NOTE: we need to reload page, so that we get rid of the loaded GA / Disqus scripts!
+        location.reload();
       }
       if (type == 'opt-out') {
         enableCookies();
       }
+    },
+
+    onPopupOpen: function() {
+      console.log(`cc - onPopupOpen`);
+    },
+
+    onPopupClose: function() {
+      console.log(`cc - onPopupClose`);
     }
+
   });
 
 })();
