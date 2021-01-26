@@ -50,12 +50,15 @@ layout: compress
 
     {% include search-loader.html %}
 
-    <!-- consent scripts -->
-    {% if site.consent_scripts %}
-      {% for script in site.consent_scripts %}
-        <script src="{{ script | relative_url }}"></script>
-      {% endfor %}
-    {% endif %}
+    <!-- scripts - allowing consent -->
+    <script src="/assets/js/scripts_config.js"></script>
+    <script>
+      (function() {
+        var enableConsentEngine = JSON.parse('{{ site.cookie_consent.enabled }}');
+        var consentUrl = '{{ site.cookie_consent.consent_url }}';
+        scripts_config.loadScripts(enableConsentEngine, consentUrl);
+      }());
+    </script>
 
   </body>
 

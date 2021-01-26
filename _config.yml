@@ -19,8 +19,9 @@ description: >-                        # used by seo meta and the atom feed
   agile
   digitalization
 
-consent_scripts:
-  - assets/js/cookieconsent-config.js
+cookie_consent:
+  enabled: true
+  consent_url: /cookie
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://hidegh.github.io'
