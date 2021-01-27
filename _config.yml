@@ -107,7 +107,8 @@ avatar: /assets/img/me.jpg
 # boolean type, the global switch for ToC in posts.
 toc: true
 
-paginate: 4
+paginate: 10
+paginate_path: /blog/:num/
 
 kramdown:
   syntax_highlighter: rouge
@@ -153,10 +154,17 @@ defaults:
     values:
       breadcrumb:
         -
-          label: Posts
+          label: Home
   -
     scope:
-      path: tags
+      path: blog/index.html
+    values:
+      breadcrumb:
+        -
+          label: Blog posts
+  -
+    scope:
+      path: tags      # special 'path' relates to: jekyll-archives
     values:
       breadcrumb:
         -
@@ -167,7 +175,7 @@ defaults:
           url: /tabs/tags/
   -
     scope:
-      path: categories
+      path: categories  # special 'path' relates to: jekyll-archives
     values:
       breadcrumb:
         -

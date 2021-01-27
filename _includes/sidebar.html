@@ -40,6 +40,16 @@
         <span>{{ "HOME" }}</span>
       </a>
     </li>
+    <!-- blog -->
+    {% assign hasSeparateBlogLink = site.paginate_path | startswith: "/blog/" %}
+    {% if hasSeparateBlogLink %}
+    <li class="nav-item{% if page.layout == 'posts' %}{{ " active" }}{% endif %}">
+      <a href="{{ '/blog' | relative_url }}" class="nav-link">
+        <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
+        <span>{{ "BLOG POSTS" }}</span>
+      </a>
+    </li>
+    {% endif %}
     <!-- the real tabs -->
     {% for tab in site.tabs %}
     <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
