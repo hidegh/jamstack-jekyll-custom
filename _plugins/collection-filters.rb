@@ -1,7 +1,7 @@
 # Based on: https://github.com/MichaelCurrin/jekyll-keys-filter
 
 # Copyright (c) 2021, hidegh
-# Usage: {{ array | skip: 2 | jsonify }}
+# Usage: {{ array | take: 2 | jsonify }}
 
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -16,11 +16,24 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 module Jekyll
-  module SkipFilter
+  module CollectionFilters
+
+    # Usage: {{ hash | keys | jsonify }}
+    def keys(input)
+      input.keys
+    end
+
+    # Usage: {{ array | skip: 2 | jsonify }}
     def skip(input, count)
       input[Range.new(count, input.size - 1)]
     end
+
+    # Usage: {{ array | take: 2 | jsonify }}
+    def take(input, count)
+      input.take(count)
+    end
+
   end
 end
 
-Liquid::Template.register_filter(Jekyll::SkipFilter)
+Liquid::Template.register_filter(Jekyll::CollectionFilters)
