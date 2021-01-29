@@ -10,32 +10,78 @@ layout: page
 
 
 <div id="archives" class="pl-xl-2">
-{% for post in site.posts %}
-  {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
-  {% capture pre_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
-  {% if forloop.first %}
-    {% assign last_day = "" %}
-    {% assign last_month = "" %}
-  <span class="lead">{{this_year}}</span>
-  <ul class="list-unstyled">
-  {% endif %}
-    <li>
-      <div>
-        {% capture this_day %}{{ post.date | date: "%d" }}{% endcapture %}
-        {% capture this_month %}{{ post.date | date: "%b" }}{% endcapture %}
-        <span class="date day">{{ this_day }}</span>
-        <span class="date month small text-muted">{{ this_month }}</span>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+
+  <ul class="timeline">
+
+  {% for post in site.posts %}
+    {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+    {% capture pre_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
+    {% if forloop.first %}
+      {% assign last_day = "" %}
+      {% assign last_month = "" %}
+    <li class="lead">
+      <div class="item-timestamp">
+          <span class="year">{{this_year}}</span>
       </div>
     </li>
-  {% if forloop.last %}
+    {% endif %}
+      <li>
+      {% if forloop.first == false %}
+      <div class="separator"></div>
+      {% endif %}
+        <div class="item-timestamp">
+          {% capture this_day %}{{ post.date | date: "%d" }}{% endcapture %}
+          {% capture this_month %}{{ post.date | date: "%b" }}{% endcapture %}
+          <span class="date day">{{ this_day }}</span>
+          <span class="date month small text-muted">{{ this_month }}</span>
+        </div>
+        <div class="item-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </div>
+        <div class="item-detail">
+          <div class="text-muted">
+            <!-- categories -->
+            {% if post.categories.size > 0 %}
+            <span class="post-meta">
+              <i class="far fa-folder-open fa-fw mr-1"></i>
+              {% assign this_cats = post.categories %}
+              {% for category in this_cats %}
+                <a href='{{ site.baseurl }}/categories/{{ category | slugify | url_encode }}/'>{{ category }}</a>
+                {%- unless forloop.last -%}, {%- endunless -%}
+              {% endfor %}
+            </span>
+            {% endif %}
+          </div>
+          <div class="text-muted">
+            <!-- tags -->
+            {% if post.tags.size > 0 %}
+            <span class="post-meta post-tags">
+              <i class="fa fa-tags fa-fw mr-1"></i>
+              {% assign this_tags = post.tags %}
+              {% for tag in this_tags %}
+              <a href="{{ site.baseurl }}/tags/{{ tag | slugify | url_encode }}/"
+                class="post-tag no-text-decoration" >
+                {{- tag -}}
+              </a>
+              {% endfor %}
+            </span>
+            {% endif %}
+          </div>
+        </div>
+      </li>
+    {% if forloop.last %}
+
+    {% elsif this_year != pre_year %}
+    <li class="lead">
+      <div class="item-timestamp">
+          <span class="year">{{pre_year}}</span>
+      </div>
+    </li>
+      {% assign last_day = "" %}
+      {% assign last_month = "" %}
+    {% endif %}
+  {% endfor %}
+
   </ul>
-  {% elsif this_year != pre_year %}
-  </ul>
-  <span class="lead">{{pre_year}}</span>
-  <ul class="list-unstyled">
-    {% assign last_day = "" %}
-    {% assign last_month = "" %}
-  {% endif %}
-{% endfor %}
+
 </div>

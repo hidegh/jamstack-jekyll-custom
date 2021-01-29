@@ -9,136 +9,150 @@
 
 {% include_relative _addon/main.scss %}
 
-%date-timeline {
-  content: "";
-  width: 4px;
-  left: 75px;
-  display: inline-block;
-  float: left;
-  position: relative;
-  background-color: var(--timeline-color);
-}
+/*
+ * NOTES:
+ * $timeline-timestamp-width: must be REM as it has to be a fixed width, regardless of the .timespamp font-size setting
+ * $timeline-timestamp-padding-right: must be REM, otherwise the distance between right-aligned text and timeline-line won't be equal
+ * When altering margin/padding (especially TOP) for .item-timestamp and .item-title, make sure both get's same values as the alignment of "dot's" depends on the height!
+ *
+ * Padding of content has to be done via the divs inside .item-detail (otherwise we'd have extra padding on empty .item-details)!
+ */
+$timeline-item-separator-height: .5em;
+$timeline-timestamp-width: 6rem;
+$timeline-timestamp-padding-right: 1rem;
+$timeline-line-width: 4px;
+$timeline-content-padding-left: 1em;
 
-#archives {
-  letter-spacing: 0.03rem;
-  li {
-    font-size: 1.1rem;
-    line-height: 3rem;
+ul.timeline {
+
+  padding-left: 0;
+
+  & li {
+    position: relative;
+
+    list-style: none;
+    padding-left: 0;
+
+    border-left: $timeline-line-width solid var(--timeline-color);
+    margin-left: $timeline-timestamp-width;
+
+    & .separator {
+      height: $timeline-item-separator-height;
+    }
+    & .item-timestamp {
+      position: relative;
+
+      display: inline-block;
+      vertical-align: middle;
+
+      text-align: right;
+
+      margin-left: #{ -1 * $timeline-timestamp-width };
+      padding-right: $timeline-timestamp-padding-right;
+      width: $timeline-timestamp-width;
+    }
+    & .item-title {
+      display: inline-block;
+      vertical-align: middle;
+      width: calc(100% - #{$timeline-line-width});
+      // removing spaces between 2 inline-blocks - https://codepen.io/chriscoyier/pen/hmlqF
+      padding-left: calc(#{$timeline-content-padding-left} - 4px);
+    }
+    & .item-detail {
+      display: inline-block;
+      width: 100%;
+      padding-left: $timeline-content-padding-left;
+    }
+
     &:nth-child(odd) {
       background-color: var(--main-wrapper-bg, #fff);
       background-image: linear-gradient(
         to left, #fff, #fbfbfb, #fbfbfb, #fbfbfb, #fff);
     }
-    > div {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
 
-  span.lead {
-    font-size: 1.5rem;
-    position: relative;
-    left: 8px;
-
-    &:not(:first-child) {
-      position: relative;
-      left: 4px;
-      &::after {
-        left: 67px;
-      }
-    }
-
-    &::after { /* Year dot */
+    &.lead .item-timestamp:before {
+      /* A circle for Year */
       content: "";
-      display: block;
-      position: relative;
+      display: inline-block;
+      position: absolute;
       -webkit-border-radius: 50%;
       -moz-border-radius: 50%;
       border-radius: 50%;
       width: 12px;
       height: 12px;
-      top: -26px;
-      left: 63px;
+      left: calc(#{$timeline-timestamp-width} - 6px - #{$timeline-line-width} / 2);
+      top: calc(50% - 6px);
       border: 3px solid;
       background-color: var(--timeline-year-dot-color);
       border-color: var(--timeline-node-bg);
       box-shadow: 0 0 2px 0 #c2c6cc;
       z-index: 1;
     }
-  } // #archives span.lead
 
-  .date {
-    white-space: nowrap;
-    display: inline-block;
-    &.month {
-      width: 1.4rem;
-      text-align: center;
+    &:not(.lead) .item-timestamp:before {
+      /* A dot for Month and Day */
+      content: "";
+      display: inline-block;
+      position: absolute;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      width: 8px;
+      height: 8px;
+      left: calc(#{$timeline-timestamp-width} - 4px - #{$timeline-line-width} / 2);
+      top: calc(50% - 4px);
+      background-color: var(--timeline-node-bg);
+      box-shadow: 0 0 3px 0 #c2c6cc;
+      z-index: 1;
+    }
 
-      ~ a::before {
-        /* A dot for Month and Day */
-        content: "";
-        display: inline-block;
-        position: relative;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        border-radius: 50%;
-        width: 8px;
-        height: 8px;
-        float: left;
-        top: 1.35rem;
-        left: 69px;
-        background-color: var(--timeline-node-bg);
-        box-shadow: 0 0 3px 0 #c2c6cc;
-        z-index: 1;
-      }
-    }
-    &.day {
-      font-size: 85%;
-      font-family: 'Lato', sans-serif;
-      text-align: center;
-      margin-right: -2px;
-      width: 1.2rem;
-      position: relative;
-      left: -.15rem;
-    }
-  } // #archives .date
+  }
 
-  ul {
-    > li {
-      > div > a {
-        /* post title in Archvies */
-        margin-left: 2.5rem;
-        position: relative;
-        top: 0.1rem;
-      }
-      &::after {
-        @extend %date-timeline;
-        height: 2.8rem;
-        top: -1.3rem;
-      }
-      &:first-child::before {
-        @extend %date-timeline;
-        height: 3.06rem;
-        top: -1.61rem;
-      }
-    }
-    &:not(:last-child) > li:last-child::after {
-      height: 3.4rem;
-    }
-    &:last-child > li:last-child::after {
-      display: none;
-    }
-  } // #archives ul
-
-} // #archives
-
+}
 
 @media all and (max-width: 576px) {
   #archives {
     margin-top: -1rem;
-    ul {
+    ul.timeline {
       letter-spacing: 0;
+    }
+  }
+}
+
+/*
+ * Adding extra styles
+ */
+
+ul.timeline {
+  font-size: 1.1rem;
+  line-height: 1.4rem;
+
+  & li {
+
+    & .item-timestamp {
+      & span.date {
+        white-space: nowrap;
+      }
+      & span.year {
+        font-size: 1.5rem;
+      }
+      & span.month {
+        width: 1.4rem;
+      }
+      & span.day {
+        font-size: 85%;
+        font-family: 'Lato', sans-serif;
+      }
+    }
+    & .item-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    & .item-detail {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
