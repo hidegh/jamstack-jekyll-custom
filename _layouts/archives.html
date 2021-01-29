@@ -39,34 +39,7 @@ layout: page
           <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
         </div>
         <div class="item-detail">
-          <div class="text-muted">
-            <!-- categories -->
-            {% if post.categories.size > 0 %}
-            <span class="post-meta">
-              <i class="far fa-folder-open fa-fw mr-1"></i>
-              {% assign this_cats = post.categories %}
-              {% for category in this_cats %}
-                <a href='{{ site.baseurl }}/categories/{{ category | slugify | url_encode }}/'>{{ category }}</a>
-                {%- unless forloop.last -%}, {%- endunless -%}
-              {% endfor %}
-            </span>
-            {% endif %}
-          </div>
-          <div class="text-muted">
-            <!-- tags -->
-            {% if post.tags.size > 0 %}
-            <span class="post-meta post-tags">
-              <i class="fa fa-tags fa-fw mr-1"></i>
-              {% assign this_tags = post.tags %}
-              {% for tag in this_tags %}
-              <a href="{{ site.baseurl }}/tags/{{ tag | slugify | url_encode }}/"
-                class="post-tag no-text-decoration" >
-                {{- tag -}}
-              </a>
-              {% endfor %}
-            </span>
-            {% endif %}
-          </div>
+          {% include post-meta.html post = post %}
         </div>
       </li>
     {% if forloop.last %}

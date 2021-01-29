@@ -60,6 +60,7 @@ layout: page
       </p>
     </div>
 
+
     <div class="post-meta text-muted d-flex justify-content-between">
 
       <div>
@@ -81,13 +82,17 @@ layout: page
       </div>
 
       {% if post.pin %}
-      <div class="pin">
+      <div class="pin text-nowrap">
         <i class="fas fa-thumbtack fa-fw"></i>
         <span>{{ site.data.label.pin_prompt }}</span>
       </div>
       {% endif %}
 
     </div> <!-- .post-meta -->
+
+    <div class="pt-1 text-center">
+      {% include post-meta.html post = post %}
+    </div>
 
   </div> <!-- .post-review -->
 
