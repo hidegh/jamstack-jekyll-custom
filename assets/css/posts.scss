@@ -57,6 +57,25 @@
       }
     }
 
+    .post-categories-tags {
+
+      display: inline-block;
+
+      overflow: hidden;
+      width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      > div {
+        display: inline;
+
+        &:not(:first-child) {
+          margin-left: 2em;
+        }
+      }
+
+    }
+
   } // .post-preview
 
 } // #post-list
