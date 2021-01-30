@@ -2,7 +2,7 @@
 
 <div class="text-muted">
   <!-- categories -->
-  {% if post.categories.size > 0 %}
+  {% if include.post.categories.size > 0 %}
   <span class="post-meta">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     {% assign this_cats = post.categories %}
@@ -15,7 +15,7 @@
 </div>
 <div class="text-muted">
   <!-- tags -->
-  {% if post.tags.size > 0 %}
+  {% if include.post.tags.size > 0 %}
   <span class="post-meta post-tags">
     <i class="fa fa-tags fa-fw mr-1"></i>
     {% assign this_tags = post.tags %}
