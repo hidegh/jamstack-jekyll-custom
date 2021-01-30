@@ -60,6 +60,7 @@ body {
 
 /*--- sidebar layout ---*/
 
+// MENU.YML related: obsolete variables: $tab-count, $tab-cursor-height
 $tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
 
 $sidebar-display: "sidebar-display";
@@ -106,8 +107,11 @@ $sidebar-display: "sidebar-display";
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 1px;
-    display: table-cell;
     vertical-align: middle;
+
+    // MENU.YML related: need to clear this to allow proper multi-level menu rendering
+    // display: table-cell;
+    white-space: nowrap;
   }
 
   .nav-item {
@@ -126,9 +130,15 @@ $sidebar-display: "sidebar-display";
     }
   }
 
-  ul {
-    height: $tab-height * $tab-count;
+  > ul {
+    // MENU.YML related: just 1st level ul should have a bottom margin
     margin-bottom: 2rem;
+  }
+
+  ul {
+
+    // MENU.YML related:
+    // height: $tab-height * $tab-count;
     padding-left: 0;
 
     > li {
@@ -150,13 +160,18 @@ $sidebar-display: "sidebar-display";
           position: relative;
           right: 1px;
           width: $cursor-width;
-          height: $tab-cursor-height;
+          // MENU.YML related: need to clear this to allow proper multi-level menu rendering - use padding on ul instead!
+          // height: $tab-cursor-height;
           border-radius: 1px;
           background-color: var(--nav-cursor-color);
           pointer-events: none;
         }
       }
     } // li
+
+    /*
+     * MENU.YML related: removed as menu is now dynamically added via _data/menu.yml
+     *
 
     @mixin fix-cursor($top) {
       top: $top;
@@ -182,6 +197,8 @@ $sidebar-display: "sidebar-display";
       }
 
     } // @for
+
+    */
 
   } // ul
 

@@ -1,0 +1,43 @@
+# menu.html include configuration
+# has advanced URL matching and thus allows to match on partial URL's
+# always enter the desired redirection url as 1st, then add any other URLs, feel free to append * for partial matching
+# items with matched URL will have an active class set
+-
+  title: Home
+  url: /
+  icon: fas fa-home
+  # sample for multiple menu nesting
+  # menu:
+  #   -
+  #     title: Home intro
+  #     url: /home/intro/*
+  #     icon: fas fa-home
+  #     menu:
+  #       -
+  #         title: Home intro - inner
+  #         url: /home/intro/inner*
+  #         icon: fas fa-home
+  #   -
+  #     title: Home outro
+  #     url: /home/outro/*
+  #     icon: fas fa-home
+-
+  title: Posts
+  url: /blog/*, /posts/*
+  icon: fas fa-blog
+-
+  title: Categories
+  url: /tabs/categories/, /categories/*
+  icon: fas fa-stream
+-
+  title: Tags
+  url: /tabs/tags/, /tags/*
+  icon: fas fa-tags
+-
+  title: Archives
+  url: /tabs/archives/
+  icon: fas fa-archive
+-
+  title: About
+  url: /tabs/about/
+  icon: fas fa-info

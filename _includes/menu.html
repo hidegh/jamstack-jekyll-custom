@@ -1,0 +1,35 @@
+<ul>
+{% for item in include.menu %}
+
+  {% assign urls = item.url | split: "," %}
+  {% assign routeUrl = nil %}
+  {% assign isActive = false %}
+  {% for url in urls %}
+    {% assign url_fixed = url | strip %}
+    {% assign allowPartial = url | endswith: "*" %}
+    {% assign url_fixed = url_fixed | replace: "*", "" %}
+    {% assign urlPartialMatch = page.url | startswith: url_fixed %}
+    {% if routeUrl == nil %}{% assign routeUrl = url_fixed %}{% endif %}
+
+    {% if page.url == url or allowPartial and urlPartialMatch %}
+      {% assign isActive = true %}
+      {% break %}
+    {% endif %}
+
+  {% endfor %}
+
+  <li class="nav-item{% if isActive %}{{ " active" }}{% endif %}">
+
+    <a href="{{ routeUrl | relative_url }}" class="nav-link">
+      <i class="fa-fw {{ item.icon }} ml-xl-3 mr-xl-3 unloaded"></i>
+      <span>{{ item.title | upcase }}</span>
+    </a>
+
+    {% if item.menu != nil %}
+      {% include menu.html menu = item.menu multi_level = include.multi_level %}
+    {% endif %}
+
+  </li>
+
+{% endfor %}
+</ul>
