@@ -126,6 +126,8 @@ kramdown:
 permalink: /posts/:title/
 
 collections:
+  partials:
+    output: true
   tabs:
     output: true
     sort_by: order
@@ -184,6 +186,11 @@ defaults:
         -
           label: Categories
           url: /tabs/categories/
+  -
+    scope:
+      type: partials
+    values:
+      layout: simple
   -
     scope:
       path: ''

@@ -15,24 +15,14 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 module Jekyll
-  module CollectionFilters
+  module ObjectFilters
 
-    # Usage: {{ hash | keys | jsonify }}
-    def keys(input)
-      input.keys
-    end
-
-    # Usage: {{ array | skip: 2 | jsonify }}
-    def skip(input, count)
-      input[Range.new(count, input.size - 1)]
-    end
-
-    # Usage: {{ array | take: 2 | jsonify }}
-    def take(input, count)
-      input.take(count)
+    # Usage: {{ object | property: "count" | jsonify }}
+    def property(input, propertyName)
+      input[propertyName]
     end
 
   end
 end
 
-Liquid::Template.register_filter(Jekyll::CollectionFilters)
+Liquid::Template.register_filter(Jekyll::ObjectFilters)
