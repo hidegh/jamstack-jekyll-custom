@@ -8,6 +8,19 @@
 
 {% include_relative _addon/main.scss %}
 
+/*
+#main-wrapper {
+  background-image:
+    radial-gradient(closest-side, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6001751042213761) 90%, rgba(0,0,0,1) 100%),
+    url(/assets/img/backgrounds/blog/giammarco-boscaro-xLhKkk2tKkA-unsplash.jpg);
+
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+*/
+
 #post-list {
   margin-top: 1rem;
   padding-right: 0.5rem;

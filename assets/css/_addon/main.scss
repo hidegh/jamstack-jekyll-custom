@@ -103,8 +103,10 @@ $sidebar-display: "sidebar-display";
   }
 
   .nav-link {
+    // NOTE: made menu item's bigger
+    font-size: 1.2rem;
+
     border-radius: 0;
-    font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 1px;
     vertical-align: middle;
@@ -117,7 +119,8 @@ $sidebar-display: "sidebar-display";
   .nav-item {
     text-align: center;
     display: table;
-    height: $tab-height;
+    // MENU.YML related: replaced
+    // height: $tab-height;
     &:hover {
       .nav-link {
         color: #f8f9facf;
@@ -141,6 +144,9 @@ $sidebar-display: "sidebar-display";
     // height: $tab-height * $tab-count;
     padding-left: 0;
 
+    // For some reason 100% width on <li> will cause a small overflow, this is to avoid it...
+    overflow: hidden;
+
     > li {
       width: 100%;
 
@@ -160,8 +166,9 @@ $sidebar-display: "sidebar-display";
           position: relative;
           right: 1px;
           width: $cursor-width;
-          // MENU.YML related: need to clear this to allow proper multi-level menu rendering - use padding on ul instead!
+          // MENU.YML related: replaced with line-height!
           // height: $tab-cursor-height;
+          line-height: $menu-line-height;
           border-radius: 1px;
           background-color: var(--nav-cursor-color);
           pointer-events: none;
@@ -564,7 +571,8 @@ footer {
     }
   }
   span {
-    @include panel-label;
+    // Keep the styling we had for that part, don't like the color override, but even paddings do matter!
+    // @include panel-label;
   }
   .post-content {
     font-size: 0.9rem;
@@ -1538,14 +1546,19 @@ img {
           }
 
           > i {
-            @include icon-round(1.65rem);
+            @include icon-round(2em);
 
+            font-size: 1em;
+            position: relative;
+
+            /*
+             * Removed: line-height added to icon-round, which does a nice centering!
+             *
             line-height: 1.5rem;
-            font-size: 0.6rem;
             padding-top: 1px;
             padding-left: 1px;
-            position: relative;
             bottom: 1px;
+            */
 
             &.unloaded {
               display: inline-block !important;
@@ -1557,8 +1570,12 @@ img {
     }
 
     .sidebar-bottom {
+      /*
+       * Removed as it messed up centering!
+       *
       padding-left: 3.5rem;
       width: 100%;
+      */
 
       &.justify-content-center {
         -webkit-box-pack: start!important;
@@ -1573,9 +1590,15 @@ img {
 
       i {
         @include icon-round(2rem);
-        padding-top: 0.44rem;
+
         margin-top: .7rem; // multi line space
+
+        /*
+         * Removed: line-height added to icon-round, which does a nice centering!
+         *
+        padding-top: 0.44rem;
         bottom: 0;
+        */
       }
 
       #mode-toggle-wrapper {

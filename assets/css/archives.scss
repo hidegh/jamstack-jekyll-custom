@@ -10,6 +10,20 @@
 {% include_relative _addon/main.scss %}
 
 /*
+#main-wrapper {
+  background-image:
+    // linear-gradient(to right, rgba(0,0,0,1) 40%,rgba(255,255,255,0) 80%),
+    linear-gradient(90deg, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%),
+    url(/assets/img/backgrounds/blog/olga-dudareva-XafSGxpPzh8-unsplash.jpg);
+
+  background-size: contain;
+  background-position: right;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+*/
+
+/*
  * NOTES:
  * $timeline-timestamp-width: must be REM as it has to be a fixed width, regardless of the .timespamp font-size setting
  * $timeline-timestamp-padding-right: must be REM, otherwise the distance between right-aligned text and timeline-line won't be equal
@@ -65,9 +79,7 @@ ul.timeline {
     }
 
     &:nth-child(odd) {
-      background-color: var(--main-wrapper-bg, #fff);
-      background-image: linear-gradient(
-        to left, #fff, #fbfbfb, #fbfbfb, #fbfbfb, #fff);
+      background-image: linear-gradient(90deg, rgba(0,0,0,0.6001751042213761) 0%, rgba(74,74,74,0.5996148459383753) 0%, rgba(255,255,255,0) 100%) !important;
     }
 
     &.lead .item-timestamp:before {

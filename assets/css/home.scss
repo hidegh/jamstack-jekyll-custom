@@ -7,3 +7,271 @@
 
 ---
 {% include_relative _addon/main.scss %}
+
+/*
+#main-wrapper {
+  // NOTE: gradient -cssgradient.io- then url!
+  background-image:
+    radial-gradient(closest-side, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6001751042213761) 90%, rgba(0,0,0,1) 100%),
+    url(/assets/img/backgrounds/business/hunters-race-MYbhN8KaaEc-unsplash_dark_suit.jpg);
+
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  // NOTE: how about adding some parallax effect? https://themes.artbees.net/blog/pure-css-parallax-in-5-minutes/
+}
+*/
+#home-content {
+  margin-top: 1.5rem;
+}
+
+.logo {
+  height: 4em;
+  margin: 2em 0em;
+}
+
+.img-heading {
+  max-height: 24em;
+}
+
+.img-blend {
+  mix-blend-mode: darken;
+}
+
+.img-fade {
+  -webkit-mask-image:
+    linear-gradient(0deg, #fff 0 calc(100% - 3em), transparent 100%),
+    linear-gradient(90deg, #fff 0 calc(100% - 3em), transparent 100%),
+    linear-gradient(180deg, #fff 0 calc(100% - 3em), transparent 100%),
+    linear-gradient(270deg, #fff 0 calc(100% - 3em), transparent 100%),
+    ;
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-composite: source-in;
+  ;
+}
+
+.break {
+  flex: 0 0 100%;
+}
+
+
+.tiles {
+
+  // .no-gutters for row's/col's, custom padding as gutters for col's
+  &.row, & .row {
+    padding: 0;
+    margin: 0;
+
+    & [class^='col-'],
+    & .col
+    {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  // custom gutters
+  & [class^='col-'],
+  & .col
+  {
+    padding: 1em .5em !important;
+  }
+
+  & .tile {
+    // Need position relative and z-index to be set for showing absolutly floated images
+    position: relative;
+    z-index: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 6em;
+    height: 100%;
+
+    justify-content: center;
+    align-items: center;
+
+    transition: all .35s ease-in-out;
+
+    &:disabled, &.disabled, &[disabled] {
+
+      & a {
+        pointer-events: none;
+        cursor: not-allowed;
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        box-shadow: inset 0 0 1920px rgba(128, 128, 128, .8);
+        filter: blur(.1em);
+      }
+
+    }
+
+    &:not(:disabled):not(.disabled):not([disabled]) {
+
+      &:hover {
+        transition: all .35s ease-in-out;
+
+        // Make footer larger
+        & .footer {
+          transition: all .35s ease-in-out;
+          line-height: 3em;
+          color: #fcfcfc;
+        }
+
+        // Add bottom border effect...
+        // border-bottom: .3em solid var(--btn-text-color);
+
+        // Another effect...moving footer to top..but has no transition!
+        // flex-direction: column-reverse;
+
+        // Boxing...
+        // box-shadow: 0px 0px 0px .25em var(--btn-text-color);
+      }
+    }
+
+    & > a {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+
+      & span.title {
+
+        display: flex;
+
+        padding: .25em .5em;
+
+        font-size: 1.8em;
+        font-weight: bold;
+
+        &.big {
+          height: 100%;
+          justify-content: center;
+          align-items: center;
+
+          font-size: 1.8em;
+          letter-spacing: .1em;
+          color: #fcfcfc;
+          font-weight: bold;
+          text-transform: uppercase;
+          font-variant: small-caps;
+
+          transform: scale(1,2.5);
+        }
+      }
+
+    }
+
+    & > .title {
+      z-index: 1000;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: inherit;
+
+      font-size: 1.8em;
+      letter-spacing: .1em;
+      transform: scale(1,2.5);
+      color: #fcfcfc;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-variant: small-caps;
+    }
+
+    & .content {
+
+      padding: .5em 1em;
+
+      position: relative;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    & .footer {
+      transition: all .35s ease-in-out;
+
+      vertical-align: bottom;
+
+      text-align: center;
+      width: 100%;
+      color: var(--btn-text-color);
+      background-color: var(--btn-active-bg);
+
+      font-weight: bold;
+      text-transform: uppercase;
+      font-variant: small-caps;
+    }
+
+    & img.overlay {
+      // NOTE: empty class attribute is for some reason required, otherwise an intristic 1x1 image is shown
+      pointer-events: none;
+
+      // Different options avail, setting default: cover (keeping original ration, cropping on x/y sides)
+      object-fit: cover;
+
+      // Need z-index -1 for image to go into background
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+  }
+
+}
+
+.card {
+
+  background-color: var(--card-bg);
+  border-color: var(--card-border-color);
+  box-shadow: 0 0 5px 0 var(--card-box-shadow);
+
+  transition: all .35s ease-in-out;
+
+  & .card-header {
+    color: var(--link-color);
+  }
+
+  & .card-body {
+
+    padding: .5em 1.25em;
+
+    & .card-title {
+      color: var(--link-color);
+    }
+
+    & .card-text {
+      color: var(--text-color);
+      margin: 0;
+    }
+
+  }
+
+  & .card-footer {
+    padding: 0 1.25em;
+  }
+
+  &:hover {
+    transition: transform .35s ease-in-out;
+    transform: translate3d(0, -4px, 0);
+    box-shadow: 0 2px 6px -1px rgba(255,0,0,0.80);
+  }
+
+}

@@ -10,6 +10,19 @@
 {% include_relative _addon/main.scss %}
 {% include_relative _addon/syntax.scss %}
 
+/*
+#main-wrapper {
+  background-image:
+    radial-gradient(closest-side, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6001751042213761) 90%, rgba(0,0,0,1) 100%),
+    url(/assets/img/backgrounds/blog/patrick-fore-0gkw_9fy0eQ-unsplash.jpg);
+
+  background-size: auto;
+  background-attachment: scroll;
+  background-position: top right;
+  background-repeat: no-repeat;
+}
+*/
+
 $prompt-older: "{{ site.data.label.post.button.previous }}";
 $prompt-newer: "{{ site.data.label.post.button.next }}";
 
@@ -149,7 +162,8 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
     top: 6rem;
   }
   > span {
-    @include panel-label;
+    // Keep the styling we had for that part, don't like the color override, but even paddings do matter!
+    // @include panel-label;
   }
 }
 

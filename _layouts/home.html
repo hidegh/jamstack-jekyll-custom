@@ -6,3 +6,187 @@ layout: page
 # © 2017-2019 Cotes Chung
 # MIT Licensed
 ---
+
+<div id="home-content">
+
+  <!--
+  <img class="logo" src="/assets/img/reflection.png"></img>
+  -->
+
+  <codersrank-summary
+    username="hidegh"
+    branding="false"
+    style="
+      --bg-color: var(--card-border-color);
+      --border: none;
+      --border-radius: .1em;
+      --header-padding: .4em;
+      --header-bg-color: var(--card-border-color);
+      --header-text-color: var(--link-color);
+      --avatar-size: 4em;
+      --name-font-size: inherit;
+      --name-font-weight: bold;
+      --rank-font-size: inherit;
+      --preloader-color:var(--link-color);
+      --badges-padding: .4em;
+      --badge-border-radius: .1em;
+      --badge-bg-color: var(--card-box-shadow);
+      --badge-box-shadow: inherit;
+      --badge-border: none;
+      --badge-margin: .4em;
+      --badge-padding: .2em;
+      --badge-text-color: var(--text-color);
+      --badge-rank-font-size: 1em;
+      --badge-rank-font-weight: bold;
+      --badge-icon-size: 1.4em;
+      --badge-technology-font-weight: 600;
+      --badge-technology-font-size: 1em;
+      --badge-location-font-size: .8em;
+      --badge-location-font-weight: normal;
+      --branding-text-color: inherit;
+    ">
+  </codersrank-summary>
+
+  <hr />
+
+  {{ site.partials | find: "path", "_partials/reflection/pitch.md" }}
+
+  <hr/>
+
+  <div class="tiles row row-flex row-cols-1 row-cols-sm-2 row-cols-md-3">
+
+    <div class="col">
+      <div class="tile bg-primary">
+        <a href="/blog">
+          <span class="title big">
+            <!--Blog-->
+          </span>
+        </a>
+        <img class="overlay" src="/assets/img/tiles/photo-1509827908497-9d239de281bc_blog.jpg" />
+        <div class="content">
+        </div>
+        <div class="footer">
+          <span>Blog</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="tile bg-primary">
+        <a href="/">
+          <span class="title">
+            <!--Projects-->
+          </span>
+        </a>
+        <img class="overlay" src="/assets/img/tiles/photo-1522542550221-31fd19575a2d_mockup.jpg" />
+        <div class="content">
+        </div>
+        <div class="footer">
+          <span>Projects</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="tile bg-primary">
+        <a href="/"></a>
+        <img class="overlay" src="/assets/img/tiles/photo-1507679799987-c73779587ccf_suit.jpg" />
+        <div class="content">
+        </div>
+        <div class="footer">
+          Clients
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col d-none">
+      <div class="tile disabled bg-primary">
+        <a href="/"></a>
+        <img class="overlay" src="/assets/img/tiles/photo-1605858299258-36375bd7132c_palette.jpg" />
+        <div class="content">
+        </div>
+        <div class="footer">
+          <span>Services</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>Services</h2>
+
+  <div>
+    <figure class="figure float-left mr-3">
+      <img class="img-heading img-fade figure-img img-fluid rounded" src="/assets/img/tiles/photo-1605858299258-36375bd7132c_palette.jpg" alt="A generic square placeholder image with rounded corners in a figure.">
+      <figcaption class="figure-caption">Our services</figcaption>
+    </figure>
+    <p>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+      Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+      of Lorem Ipsum.
+    </p>
+    <div class="clearfix"></div>
+  </div>
+
+  <h2>Recent Articles</h2>
+
+  {% assign MAX_PIN_COUNT = 2 %}
+  {% assign MAX_POST_COUNT = 4 %}
+
+  {% assign pinned = site.posts | where_exp: "item", "item.pin == true" | take: MAX_PIN_COUNT %}
+  {% assign default = site.posts | where_exp: "item", "item.pin != true" | take: MAX_POST_COUNT %}
+  {% assign posts = pinned | concat: default | take: MAX_POST_COUNT %}
+
+  <div class="row row-cols-1 row-cols-md-2">
+
+    {% for post in posts %}
+
+    <div class="col mb-3">
+
+      <div class="card h-100">
+        <img src="..." class="d-none card-img-top" alt="...">
+        <div class="d-none card-header"></div>
+        <div class="card-body">
+          <span class="card-title">{{ post.title }}</span>
+          <p class="card-text small">
+            {% include no-linenos.html content=post.content %}
+            {{ content | markdownify | strip_html | truncate: 100 }}
+          </p>
+          <a href="{{ post.url | relative_url }}" class="stretched-link"></a>
+        </div>
+        <div class="card-footer text-muted small">
+          <div class="d-flex">
+            <span>
+              <!-- posted date -->
+              <i class="far fa-calendar fa-fw"></i>
+              {% include timeago.html date=post.date tooltip=true %}
+            </span>
+            &nbsp;
+            <span>
+              <!-- time to read -->
+              <i class="far fa-clock fa-fw"></i>
+              {% include read-time.html content=post.content %}
+            </span>
+            &nbsp;
+            <!-- pin -->
+            <div class="ml-auto pin text-nowrap">
+              {% if post.pin %}
+              <span>{{ site.data.label.pin_prompt }}</span>
+              <i class="fas fa-thumbtack fa-fw"></i>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    {% endfor %}
+
+  </div>
+
+</div>
