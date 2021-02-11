@@ -49,15 +49,28 @@ layout: page
 {% for post in posts %}
 
   <div class="post-preview">
+
     <h1>
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
     </h1>
 
     <div class="post-content">
+
+      {% if post.image %}
+        {% assign isFullPath = post.image | startswith: "/" %}
+        {% if isFullPath %}
+          <img src="{{post.image | relative_url }}" class="float-left w-25 mr-3 mb-1 img-thumbnail" />
+        {% else %}
+          <img src="{{post.url | relative_url | uri_join: post.image}}" class="float-left w-25 mr-3 mb-1 img-thumbnail" />
+        {% endif %}
+      {% endif %}
+
       <p>
         {% include no-linenos.html content=post.content %}
         {{ content | markdownify | strip_html | truncate: 200 }}
       </p>
+
+      <div class="clearfix"></div>
     </div>
 
 
