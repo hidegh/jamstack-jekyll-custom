@@ -7,6 +7,13 @@ layout: page
 # MIT Licensed
 ---
 
+<!-- test: call a function -->
+{% capture result %}
+  {% include test-fnc.html left=123 right=210 %}
+{% endcapture %}
+<!-- {% raw %} result is: {{ result }} {% endraw %} -->
+
+<!-- posts -->
 
 {% assign pinned = site.posts | where_exp: "item", "item.pin == true"  %}
 {% assign default = site.posts | where_exp: "item", "item.pin != true"  %}
